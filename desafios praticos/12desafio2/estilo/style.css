@@ -1,9 +1,6 @@
 @charset "UTF-8";
 
-    
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Passion+One:wght@400;700;900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
-
-    
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Passion+One:wght@400;700;900&family=Sriracha&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 
 :root {
@@ -11,12 +8,11 @@
   --fonte2: 'Passion One', cursive;
   --fonte3: "Sriracha", cursive;
 }
-    
 
 * {
   margin: 0px;
   padding: 0px;
-  font-size: 1em;
+  font-size: 1em; /* Considerar se esta linha é realmente necessária ou se pode causar problemas de herança. Normalmente, font-size é definido no body ou html. */
 }
 
 html, body {
@@ -29,17 +25,21 @@ header {
   background-color: black;
   color: white;
   text-align: center;
+  padding-top: 50px;    /* Movido padding para o header */
+  padding-bottom: 50px; /* Movido padding para o header */
 }
 
 header > h1 {
-  padding-top: 50px;
+  /* padding-top: 50px; Removido */
   font-variant: small-caps;
   font-family: var(--fonte2);
-  font-size: 10vw;
+  font-size: clamp(2.8rem, 10vw, 7rem); /* Ajustado com clamp() - ajuste os valores conforme necessário */
+  margin-bottom: 15px; /* Adicionado para espaço entre H1 e P */
 }
 
 header > p {
-  padding-bottom: 50px;
+  /* padding-bottom: 50px; Removido */
+  font-size: 1em; /* Garante que o parágrafo do header não seja afetado pelo clamp da section */
 }
 
 header a, footer a {
@@ -48,7 +48,7 @@ header a, footer a {
   font-weight: bolder;
 }
 
-header a:hover, footer a:hover{
+header a:hover, footer a:hover {
   text-decoration: underline;
 }
 
@@ -58,7 +58,7 @@ section {
   line-height: 2em;
   padding-left: 30px;
   font-family: var(--fonte3);
-  font-size: 3.5vw;
+  font-size: clamp(1.1rem, 3.5vw, 2.2rem); /* Ajustado com clamp() - ajuste os valores conforme necessário */
 }
 
 section > p {
@@ -76,6 +76,7 @@ section > p {
   box-shadow: inset 6px 6px 13px 0px rgba(0, 0, 0, 0.473);
   background-size: cover;
   background-attachment: fixed;
+  /* LEMBRETE: Otimize as imagens de fundo para melhor performance! */
 }
 
 .imagem > p {
@@ -92,11 +93,19 @@ section > p {
 
 #img02 {
   background-image: url('../imagens/background002.jpg');
+  background-position: center center; /* Adicionado background-position para consistência, ajuste se necessário */
 }
 
 footer {
   background-color: black;
   color: white;
   text-align: center;
-  padding-bottom: 10px;
+  padding: 10px 0; /* Ajustado para padding vertical e removido padding-bottom específico */
+}
+
+/* Media Query para desabilitar o parallax em telas menores (melhora a performance) */
+@media (max-width: 768px) {
+  .imagem {
+    background-attachment: scroll;
+  }
 }
